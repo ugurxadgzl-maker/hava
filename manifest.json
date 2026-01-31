@@ -1,0 +1,8 @@
+{
+  "name": "Akıllı Hava Durumu",
+  "short_name": "Hava",
+  "start_url": "./hava.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5"
+}
