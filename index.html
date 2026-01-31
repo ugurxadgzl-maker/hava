@@ -63,4 +63,33 @@
   <script>
     const API_KEY = “0715c81369f683c65aaf7fc9407f2b3a";
 
-    function getWe
+function getWeather() {
+  const city = document.getElementById("city").value.trim();
+  if (!city) {
+    alert("Şehir gir");
+    return;
+  }
+
+  document.getElementById("result").innerHTML = "⏳ Yükleniyor...";
+
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=tr`)
+    .then(res => {
+      if (!res.ok) throw new Error("Şehir bulunamadı");
+      return res.json();
+    })
+    .then(data => {
+      document.getElementById("result").innerHTML = `
+        <h2>${data.name}</h2>
+        <p>${data.weather[0].description}</p>
+        <h1>${Math.round(data.main.temp)}°C</h1>
+      `;
+    })
+    .catch(err => {
+      document.getElementById("result").innerHTML = "❌ Şehir bulunamadı";
+    });
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
